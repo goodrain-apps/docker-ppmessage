@@ -1,0 +1,32 @@
+{
+    "config_status": "DATABASE",
+    "db": {
+        "sqlite": {
+            "db_file_path": "{SQLITE_DB}"
+        },
+        "type": "sqlite"
+    },
+    "server": {
+        "languages": [
+            {
+                "locale": "zh_CN",
+                "name": "Simplified Chinese"
+            },
+            {
+                "locale": "en_US",
+                "name": "English"
+            }
+        ],
+        "identicon_store": "{IDENTICON_STORE}",
+        "disable_submit": true,
+        "language": {
+            "locale": "zh_CN",
+            "name": "Simplified Chinese"
+        },
+        "url": "{SITE_URL}",
+        "generic_store": "{GENERIC_STORE}",
+        "ssl": "off",
+        "port": {HTTP_PORT},
+        "name": "{TRUSTED_DOMAIN}"
+    }
+}

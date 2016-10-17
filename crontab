@@ -1,0 +1,4 @@
+*/1 * * * * root cp /app/ppmessage/ppmessage/bootstrap/config.json /data/config.json
+*/1 * * * * root cp /app/ppmessage/ppmessage/resource/assets/ppcom/assets/pp-library.min.js /data/pp-library.min.js
+*/1 * * * * root cp /app/ppmessage/ppmessage/resource/assets/ppkefu/assets/js/ppkefu.min.js /data/ppkefu.min.js
+*/1 * * * * root cp /app/ppmessage/ppmessage/resource/assets/ppconsole/static/dist/ppconsole.min.js /data/ppconsole.min.js
