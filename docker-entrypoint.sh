@@ -16,6 +16,7 @@ export SITE_URL=${SITE_URL:-'http://127.0.0.1:5000'}
 export TRUSTED_DOMAIN=$(echo ${SITE_URL} | awk -F '[\:]' '{ print $2; }')
 export TRUSTED_DOMAIN=$(echo ${TRUSTED_DOMAIN} | sed 's/\/\///g')
 export MONITOR_PORT=$(echo ${SITE_URL} | awk -F '[\:]' '{ print $3; }')
+export MONITOR_PORT=${SITE_URL:-80}
 echo "SITE_URL is: ${SITE_URL}"
 echo "MONITOR_PORT is: ${MONITOR_PORT}"
 echo "TRUSTED_DOMAIN is: ${TRUSTED_DOMAIN}"
