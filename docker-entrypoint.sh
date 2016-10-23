@@ -5,8 +5,8 @@
 # 修改对外服务的端口
 export HTTP_PORT=${HTTP_PORT:-5000}
 sed -i \
-    -e "s|8945|${HTTP_PORT}|" \
-    /app/ppmessage/ppmessage/core/constant.py
+    -e "s|{HTTP_PORT}|${HTTP_PORT}|" \
+    /usr/local/nginx/conf/nginx.conf
 
 export SQLITE_DB=/data/ppmessage.db
 export IDENTICON_STORE=/data/ppmessage/identicon
@@ -15,14 +15,16 @@ export GENERIC_STORE=/data/ppmessage/generic
 export SITE_URL=${SITE_URL:-'http://127.0.0.1:5000'}
 export TRUSTED_DOMAIN=$(echo ${SITE_URL} | awk -F '[\:]' '{ print $2; }')
 export TRUSTED_DOMAIN=$(echo ${TRUSTED_DOMAIN} | sed 's/\/\///g')
+export MONITOR_PORT=$(echo ${SITE_URL} | awk -F '[\:]' '{ print $3; }')
 echo "SITE_URL is: ${SITE_URL}"
+echo "MONITOR_PORT is: ${MONITOR_PORT}"
 echo "TRUSTED_DOMAIN is: ${TRUSTED_DOMAIN}"
 
 sed -i \
     -e "s|{SQLITE_DB}|${SQLITE_DB}|" \
     -e "s|{IDENTICON_STORE}|${IDENTICON_STORE}|" \
     -e "s|{GENERIC_STORE}|${GENERIC_STORE}|" \
-    -e "s|{HTTP_PORT}|${HTTP_PORT}|" \
+    -e "s|{HTTP_PORT}|${MONITOR_PORT}|" \
     -e "s|{SITE_URL}|${SITE_URL}|" \
     -e "s|{TRUSTED_DOMAIN}|${TRUSTED_DOMAIN}|" \
     /app/ppmessage/ppmessage/bootstrap/config.json
@@ -70,6 +72,8 @@ if [[ $1 == "bash" ]]; then
 else
     cd /app/ppmessage
     cron
+    nginx -t
+    nginx
     python ppmessage.py
 fi
 
